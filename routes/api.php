@@ -39,3 +39,6 @@ Route::post('/showbooking','JobBookingController@showAllBooking');
 
 //job review
 Route::get('/jobreview/{id}','JobReviewController@getReviewJob');
+
+//Profile Workder
+Route::post('/insertProfile','ProfileWorkerController@insertProfile');
