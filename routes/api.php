@@ -28,3 +28,6 @@ Route::post('/register','UserController@registerUser');
 Route::post('/getjoblist','JobController@getJobList');
 Route::get('/jobdetail/{id}','JobController@getJobDetail');
 Route::post('/insertjob','JobController@insert');
+
+// Job Category
+Route::get('/showjobcategory','JobCategoryController@showJobCategory');
