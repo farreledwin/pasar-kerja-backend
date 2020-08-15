@@ -23,3 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login','UserController@login');
 Route::post('/decryptdata','UserController@decryptDataLogin');
 Route::post('/register','UserController@registerUser');
+
+// Jobs
+Route::post('/getjoblist','JobController@getJobList');
+Route::get('/jobdetail/{id}','JobController@getJobDetail');
+Route::post('/insertjob','JobController@insert');
