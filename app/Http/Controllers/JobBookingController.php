@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\JobBooking;
-use Carbon\Carbon;
 use App\Job;
+use App\User;
+use Carbon\Carbon;
 class JobBookingController extends Controller
 {
     public function insertBookingJob(Request $request) {
@@ -46,5 +47,46 @@ class JobBookingController extends Controller
                 'status' => 'true'
             ]
         );
+    }
+
+    public function showAllWorkOrder(Request $request) {
+        $dataJob = Job::where('email_worker',$request->email)->get();
+        $dataUser = User::where('email',$request->email)->first();
+        
+        for($i=0;$i<count($dataJob);$i++) {
+            $dataBooking[$i] = JobBooking::where('job_id',$dataJob[$i]->_id)->first();
+            $dataBooking[$i]['job'] = Job::find($dataBooking[$i]->job_id)->first();
+            $dataBooking[$i]['user'] = $dataUser;
+        }
+
+
+
+        return response()->json([
+            'payload' => [
+                'data' => $dataBooking,
+                'status' => true
+            ]
+        ]);
+    }
+
+    public function changeStatusConfirmation(Request $request) {
+        $data = JobBooking::where('email_worker',$request->email)->first();
+
+        if($request->button == 'accept') {
+            $data->status_order = 2;
+        }
+        else {
+            $data->status_order = 3;
+        }
+
+        $data->save();
+
+        return response()->json([
+            'payload' => [
+                'data' => "update success",
+                'status' => true
+            ]
+        ]);
+
     }
 }

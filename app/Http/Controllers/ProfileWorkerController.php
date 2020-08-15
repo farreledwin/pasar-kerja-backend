@@ -19,4 +19,16 @@ class ProfileWorkerController extends Controller
         ]);
 
     }
+
+    public function viewProfile(Request $request) {
+        $data = ProfileWorker::where('email',$request->email)->first();
+
+        return response()->json([
+            'payload' => [
+                'data' => $data,
+                'status' => true
+            ]
+        ]);
+
+    }
 }
