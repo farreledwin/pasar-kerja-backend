@@ -36,3 +36,6 @@ Route::get('/showjobcategory','JobCategoryController@showJobCategory');
 //job booking
 Route::post('/insertbookingjob','JobBookingController@insertBookingJob');
 Route::post('/showbooking','JobBookingController@showAllBooking');
+
+//job review
+Route::get('/jobreview/{id}','JobReviewController@getReviewJob');
